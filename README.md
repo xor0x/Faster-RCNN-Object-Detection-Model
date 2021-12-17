@@ -14,14 +14,14 @@ The following block shows the directory structure that we will use for this proj
     │   config.py
     │   utils.py
     │   datasets.py
-    │   test.py
+    │   inference.py
     │   model.py
     │   train.py
     ├───data
     │   │───test
     │   │───train
     │   │───valid
-    ├───test_outputs
+    ├───detected_images
     │   ├───images
     ├───outputs
     │   ├───best_model.pth

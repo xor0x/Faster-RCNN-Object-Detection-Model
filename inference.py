@@ -8,7 +8,7 @@ from model import create_model
 
 from config import (
     BASE_DIR, NUM_CLASSES, DEVICE, CLASSES, 
-    RESIZE_TO, VISUALIZE_PREDICTED_IMAGES
+    RESIZE_TO, VISUALIZE_PREDICTED_IMAGES, OUTPUT_DIR
 )
 
 # this will help us create a different color for each class
@@ -52,17 +52,10 @@ for i in range(len(test_images)):
     image = torch.tensor(image, dtype=torch.float).cuda()
     # add batch dimension
     image = torch.unsqueeze(image, 0)
-    start_time = time.time()
+
     with torch.no_grad():
         outputs = model(image.to(DEVICE))
-    end_time = time.time()
 
-    # get the current fps
-    fps = 1 / (end_time - start_time)
-    # add `fps` to `total_fps`
-    total_fps += fps
-    # increment frame count
-    frame_count += 1
     # load all detection to CPU for further operations
     outputs = [{k: v.to('cpu') for k, v in t.items()} for t in outputs]
     # carry further only if there are detected boxes
@@ -93,13 +86,10 @@ for i in range(len(test_images)):
         if VISUALIZE_PREDICTED_IMAGES:
             cv2.imshow('Prediction', orig_image)
             cv2.waitKey(0)
-        cv2.imwrite(str(BASE_DIR / f"test_outputs/{image_name}.jpg"), orig_image)
+        cv2.imwrite(str(OUTPUT_DIR / f"{image_name}.jpg"), orig_image)
     print(f"Image {i+1} done...")
     print('-'*50)
 
 print('TEST PREDICTIONS COMPLETE')
 if VISUALIZE_PREDICTED_IMAGES:
     cv2.destroyAllWindows()
-# calculate and print the average FPS
-avg_fps = total_fps / frame_count
-print(f"Average FPS: {avg_fps:.3f}")

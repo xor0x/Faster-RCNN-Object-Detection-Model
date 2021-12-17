@@ -14,6 +14,11 @@ DEVICE = torch.device('cuda') if torch.cuda.is_available() else torch.device('cp
 TRAIN_DIR = BASE_DIR / 'data'/ 'train'
 # validation images and XML files directory
 VALID_DIR = BASE_DIR / 'data'/ 'valid'
+# output detected images directory
+OUTPUT_DIR = BASE_DIR / 'detected_images'
+# location to save model and plots
+OUT_DIR = BASE_DIR / 'outputs'
+
 
 # classes: 0 index is reserved for background
 # Example: CLASSES = ['__background__', "Car", "Person", "Flower" .....]
@@ -23,13 +28,8 @@ CLASSES = [
 
 NUM_CLASSES = len(CLASSES)
 
-# name to save the trained model with
-MODEL_NAME = 'model'
-
 # whether to visualize images after crearing the data loaders
 VISUALIZE_TRANSFORMED_IMAGES = False
 
 VISUALIZE_PREDICTED_IMAGES = False
 
-# location to save model and plots
-OUT_DIR = BASE_DIR / 'outputs'

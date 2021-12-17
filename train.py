@@ -1,5 +1,5 @@
 from config import (
-    DEVICE, NUM_CLASSES, NUM_EPOCHS, OUT_DIR,
+    DEVICE, NUM_CLASSES, NUM_EPOCHS,
     VISUALIZE_TRANSFORMED_IMAGES, NUM_WORKERS,
 )
 from model import create_model
